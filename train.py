@@ -69,6 +69,8 @@ model = SpaceLMQwenForCausalLM.from_pretrained(
 # load the point backbone parameters
 model = load_point_backbone_parameters(model)
 
+# 在模型初始化时启用
+model.gradient_checkpointing_enable()
 
 #########################################################
 #                                                       #

@@ -123,11 +123,13 @@ after preprocess, you will get the preprocessed data in the folder `preprocessed
 
 #### Train
 ```bash
-python train.py  --dataset_dir preprocessed_data_scene_script --dataset_name Scannet --model_path ./Qwen2.5-0.5B-Instruct --exp_path YOUR_EXP_PATH --exp_name YOUR_EXP_NAME --epochs EPOCH_NUM --batch_size BATCH_SIZE --gradient_accumulation_steps GRADIENT_ACCUMULATION_STEPS --learning_rate LEARNING_RATE --save_per_epoch SAVE_PER_EPOCH
+python train.py  --dataset_dir preprocessed_data_scene_script --dataset_name Scannet --model_path ./Qwen2.5-0.5B-Instruct --exp_path YOUR_EXP_PATH --exp_name YOUR_EXP_NAME --stage_1_epochs EPOCH_NUM --stage_2_epochs EPOCH_NUM --batch_size BATCH_SIZE --gradient_accumulation_steps GRADIENT_ACCUMULATION_STEPS --learning_rate LEARNING_RATE --save_per_epoch SAVE_PER_EPOCH
 
 # example
-python train.py  --dataset_dir preprocessed_data_scene_script --dataset_name Scannet --model_path ./Qwen2.5-0.5B-Instruct --exp_path ./exp --exp_name space_lm_model_qwen_llm_lr_1e-6_point_lr_1e-5 --epochs 20 --batch_size 2 --gradient_accumulation_steps 8 --learning_rate 1e-6 --save_per_epoch 2
+python train.py  --dataset_dir preprocessed_data_scene_script --dataset_name Scannet --model_path ./Qwen2.5-0.5B-Instruct --exp_path ./exp --exp_name space_lm_model_qwen_llm_lr_1e-6_point_lr_1e-5 --stage_1_epochs 4 --stage_2_epochs 10 --batch_size 1 --gradient_accumulation_steps 16 --learning_rate 5e-6 --save_per_epoch 2
 ```
+
+We use two stages to train the model. The first stage is to train the point backbone model and the second stage is to train the whole model on the Scannet dataset.
 
 #### Inference and Visualize
 ```bash
