@@ -24,7 +24,7 @@ class MyTrainer(Trainer):
                         p for n, p in opt_model.named_parameters() if n in point_backbone_parameters and p.requires_grad
                     ],
                     "weight_decay": self.args.weight_decay,
-                    "lr": self.args.learning_rate * 10  # set a specific learning rate for point_backbone parameters
+                    "lr": self.args.learning_rate * 100  # set a specific learning rate for point_backbone parameters
                 },
                 {
                     "params": [

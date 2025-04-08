@@ -92,6 +92,7 @@ class SpaceLMQwenForCausalLM(Qwen2ForCausalLM):
             xyz = coord[~nan_mask]
             rgb = color[~nan_mask]
             feats = torch.cat([xyz, rgb], dim=1).contiguous().to(torch.float32)
+            # feats = xyz.contiguous().to(torch.float32)
             pc_sparse_tensor = torchsparse.SparseTensor(coords=grid_coords, feats=feats)
             pc_sparse_tensor = sparse_collate([pc_sparse_tensor])  # batch_size = 1
             pc_sparse_tensor = pc_sparse_tensor.to(device)

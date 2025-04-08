@@ -1,11 +1,22 @@
 # SpaceLM 🌌
 
-[![GitHub stars](https://img.shields.io/github/stars/sengine-research/SpaceLM?style=social)](https://github.com/sengine-research/SpaceLM)
+![SpaceLM Demo](ffe4bdfb-8e94-413a-a7bd-dae4d04fec5b.png)
+
+[![Demo To be released](https://img.shields.io/badge/%F0%9F%A4%97%20Demo-To%20be%20released-ffc107?color=ffc107&logoColor=white)](https://github.com/sengine-research/SpaceLM)
+[![HuggingFace](https://img.shields.io/badge/%F0%9F%A4%97%20Train%20Dataset-To%20be%20released-ffc107?color=ffc107&logoColor=white)](https://huggingface.co/datasets/sengine-research/preprocessed-vla-3d)
+[![Technical Report](https://img.shields.io/badge/%F0%9F%93%9A%20Tech%20Report-SpaceLM-ff0000?color=ff0000&logoColor=white)](https://sengine-cos-1259101928.cos.ap-guangzhou.myqcloud.com/plane/Technical%20Report.pdf)
 [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
 ## 📖 Introduction
 
-SpaceLM is a 3D reconstruction system that can be used to reconstruct 3D models from 2D images and videos. We will improve the code and pretrained model. Stay tuned for more details and improvements.
+Inspired by [SpatialLM](https://github.com/manycore-research/SpatialLM), SpaceLM is a 3D reconstruction system that can be used to reconstruct 3D models from 2D images and videos. We will improve the code and pretrained model. Stay tuned for more details and improvements.
+
+## TODO
+- [X] Release train dataset
+- [X] Release dataset preprocess code
+- [X] Release train code
+- [ ] Release the pretrained model Apr 10
+- [ ] Add Inference and Visualize Demo Apr 15
 
 ## 📦 Environment
 
@@ -42,6 +53,7 @@ pip install spconv-cu118
 ### xformer table
 
 install xformers from the table below
+
 eg: pip install xformers==v0.0.29.post2 --index-url https://download.pytorch.org/whl/cu118
 
 | xformers          | pytorch     | CUDA            |
@@ -51,19 +63,20 @@ eg: pip install xformers==v0.0.29.post2 --index-url https://download.pytorch.org
 | 0.0.28.post2      | torch==2.5.0| cu118, cu121, cu124 |
 | 0.0.28.post1      | torch==2.4.1| cu118, cu121, cu124 |
 
+
 ## 🚀 Quick Start
 
-### Gradio Demo
+### Gradio Demo (TODO)
 
 ```bash
 python app.py
 ```
 
-### Inference and Visualize Demo
+### Inference and Visualize Demo  (PRE_TRAINED_MODEL_PATH TODO)
 
 ```bash
 # Inference
-python inference.py --model_path exp/space_lm_model_qwen_llm_lr_1e-5_point_lr_1e-4_no_stage_1_Scannet/stage_2/epoch_0 --point_cloud sample_data/scene0000_00/scene0000_00_pc_result.ply -o test.txt
+python inference.py --model_path PRE_TRAINED_MODEL_PATH --point_cloud sample_data/scene0000_00/scene0000_00_pc_result.ply -o test.txt
 
 # Save the result as rrd file
 python visualize.py --point_cloud sample_data/scene0000_00/scene0000_00_pc_result.ply --layout test.txt --save test.rrd
@@ -75,9 +88,9 @@ rerun test.rrd
 
 ## 🔍 Train Pipeline
 
-48GB VRAM GPU machine preferred and 5 hour training time needed
+48GB VRAM GPU machine preferred and 5 hours training time needed
 
-### Download Qwen2.5-0.5B-Instruct
+### Download Qwen2.5-0.5B-Instruct and Modify the Vision Token to Point Token
 
 ```bash
 modelscope download --model qwen/Qwen2.5-0.5B-Instruct --local_dir ./Qwen2.5-0.5B-Instruct
@@ -89,20 +102,24 @@ Download [scenescript_model_ase.ckpt](https://scontent-lax3-1.xx.fbcdn.net/m1/v/
 
 ### Train on Scannet Dataset (For Example)
 
-Thanks to [VLA-3D](https://github.com/HaochenZ11/VLA-3D), we can get six most popular open source dataset (Scannet/Matterport/HM3D/Unity/ARKitScenes/3RScan) with same format for easy training. We use Scannet as an example to show how to train the model. For other dataset(Matterport/HM3D/Unity/ARKitScenes/3RScan), you can refer to the code and train it by yourself.
+Thanks to [VLA-3D](https://github.com/HaochenZ11/VLA-3D), we can get six most popular open source dataset (Scannet / Matterport / HM3D / Unity / ARKitScenes / 3RScan) with same format for easy training. We use Scannet as an example to show how to train the model. For other dataset(Matterport / HM3D / Unity / ARKitScenes / 3RScan), you can refer to the code and train it by yourself.
 
 #### Download Dataset
 
 ```bash
-python dataset/download_dataset.py --download_path ./3D_dataset --dataset_name Scannet
+git lfs install
+git clone https://huggingface.co/datasets/sengine-research/preprocessed-vla-3d
 
-unzip ./3D_dataset/Scannet.zip -d ./3D_dataset/
+mkdir 3D_dataset
+unzip ./preprocessed-vla-3d/Scannet.zip -d ./3D_dataset/
 ```
 
 #### Preprocess Data
 ```bash
 python dataset/preprocess_data_scene_script.py --data_path 3D_dataset --dataset_name Scannet
 ```
+
+after preprocess, you will get the preprocessed data in the folder `preprocessed_data_scene_script`.
 
 #### Train
 ```bash
@@ -111,10 +128,6 @@ python train.py  --dataset_dir preprocessed_data_scene_script --dataset_name Sca
 # example
 python train.py  --dataset_dir preprocessed_data_scene_script --dataset_name Scannet --model_path ./Qwen2.5-0.5B-Instruct --exp_path ./exp --exp_name space_lm_model_qwen_llm_lr_1e-6_point_lr_1e-5 --epochs 20 --batch_size 2 --gradient_accumulation_steps 8 --learning_rate 1e-6 --save_per_epoch 2
 ```
-
-if you have 
-
-site-packages/torchsparse/nn/functional/conv/conv.py line 47 kmap_mode = "hashmap"
 
 #### Inference and Visualize
 ```bash
@@ -132,6 +145,7 @@ python visualize.py --point_cloud sample_data/scene0000_00/scene0000_00_pc_resul
 rerun test.rrd  # on windows
 ```
 
+
 ## 📚 Contributing
 
 We welcome contributions in the following ways:
@@ -139,6 +153,7 @@ We welcome contributions in the following ways:
 2. Create a Pull Request to improve the code
 3. Complete the project documentation
 4. Share your usage examples
+
 
 ## 🤝 Acknowledgements
 
