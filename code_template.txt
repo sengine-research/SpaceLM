@@ -1,0 +1,12 @@
+@dataclass
+class Bbox:
+    class: str
+    position_x: int
+    position_y: int
+    position_z: int
+    angle_z: int
+    scale_x: int
+    scale_y: int
+    scale_z: int
+
+bbox_i=(class,position_x,position_y,position_z,angle_z,scale_x,scale_y,scale_z)

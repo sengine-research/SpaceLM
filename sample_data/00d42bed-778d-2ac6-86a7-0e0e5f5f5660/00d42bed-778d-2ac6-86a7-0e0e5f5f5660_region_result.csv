@@ -1,0 +1,2 @@
+region_id,region_label,region_bbox_cx,region_bbox_cy,region_bbox_cz,region_bbox_xlength,region_bbox_ylength,region_bbox_zlength,region_bbox_heading
+0,Room,-0.0786574490791172,0.6718669765263541,-0.15750690492464292,6.4585399337834195,9.44401518636555,3.053802617443286,0
