@@ -9,8 +9,9 @@
 
 ## 📖 Introduction
 
-Inspired by [SpatialLM](https://github.com/manycore-research/SpatialLM), SpaceLM is a 3D reconstruction system that can be used to reconstruct 3D models from 2D images and videos. We will improve the code and pretrained model. Stay tuned for more details and improvements.
+Inspired by [SpatialLM](https://github.com/manycore-research/SpatialLM), SpaceLM is a 3D reconstruction system that can be used to reconstruct 3D models from 2D images and videos. We will improve the code and the pretrained model. Stay tuned for more details and improvements.
 
+&nbsp;
 ## TODO
 - [X] Release train dataset
 - [X] Release dataset preprocess code
@@ -18,6 +19,7 @@ Inspired by [SpatialLM](https://github.com/manycore-research/SpatialLM), SpaceLM
 - [ ] Release the pretrained model (Apr 10)
 - [ ] Add Inference and Visualize Demo (Apr 15)
 
+&nbsp;
 ## 📦 Environment
 
 ### Train Platform
@@ -64,6 +66,7 @@ eg: pip install xformers==v0.0.29.post2 --index-url https://download.pytorch.org
 | 0.0.28.post1      | torch==2.4.1| cu118, cu121, cu124 |
 
 
+&nbsp;
 ## 🚀 Quick Start
 
 ### Gradio Demo (TODO)
@@ -86,9 +89,10 @@ pip install rerun-sdk
 rerun test.rrd
 ```
 
+&nbsp;
 ## 🔍 Train Pipeline
 
-48GB VRAM GPU machine preferred and 5 hours training time needed
+Note: 48GB VRAM GPU machine preferred and 5 hours training time needed
 
 ### Download Qwen2.5-0.5B-Instruct and Modify the Vision Token to Point Token
 
@@ -119,7 +123,7 @@ unzip ./preprocessed-vla-3d/Scannet.zip -d ./3D_dataset/
 python dataset/preprocess_data_scene_script.py --data_path 3D_dataset --dataset_name Scannet
 ```
 
-after preprocess, you will get the preprocessed data in the folder `preprocessed_data_scene_script`.
+After preprocess, you will get the preprocessed data in the folder `preprocessed_data_scene_script`.
 
 #### Train
 ```bash
@@ -137,17 +141,17 @@ python inference.py --model_path YOUR_EXP_PATH/YOUR_EXP_NAME/EPOCH_NUM --point_c
 
 python visualize.py --point_cloud PLY_FILE --layout OUTPUT_FILE --save OUTPUT_FILE.rrd
 
-rerun OUTPUT_FILE.rrd # on windows
+rerun OUTPUT_FILE.rrd # better on windows
 
 # example
 python inference.py --model_path exp/space_lm_model_qwen_llm_lr_1e-5_point_lr_1e-4_no_stage_1_Scannet/stage_2/epoch_0 --point_cloud sample_data/scene0000_00/scene0000_00_pc_result.ply -o test.txt
 
 python visualize.py --point_cloud sample_data/scene0000_00/scene0000_00_pc_result.ply --layout test.txt --save test.rrd
 
-rerun test.rrd  # on windows
+rerun test.rrd  # better on windows
 ```
 
-
+&nbsp;
 ## 📚 Contributing
 
 We welcome contributions in the following ways:
@@ -156,7 +160,7 @@ We welcome contributions in the following ways:
 3. Complete the project documentation
 4. Share your usage examples
 
-
+&nbsp;
 ## 🤝 Acknowledgements
 
 This work is inspired by the following projects:
