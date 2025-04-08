@@ -15,8 +15,8 @@ Inspired by [SpatialLM](https://github.com/manycore-research/SpatialLM), SpaceLM
 - [X] Release train dataset
 - [X] Release dataset preprocess code
 - [X] Release train code
-- [ ] Release the pretrained model Apr 10
-- [ ] Add Inference and Visualize Demo Apr 15
+- [ ] Release the pretrained model (Apr 10)
+- [ ] Add Inference and Visualize Demo (Apr 15)
 
 ## 📦 Environment
 
