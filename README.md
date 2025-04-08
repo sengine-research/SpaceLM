@@ -1,6 +1,6 @@
 # SpaceLM 🌌
 
-![SpaceLM Demo](ffe4bdfb-8e94-413a-a7bd-dae4d04fec5b.png)
+![SpaceLM Demo](assets/SpaceLM_Demo.png)
 
 [![Demo To be released](https://img.shields.io/badge/%F0%9F%A4%97%20Demo-To%20be%20released-ffc107?color=ffc107&logoColor=white)](https://github.com/sengine-research/SpaceLM)
 [![HuggingFace](https://img.shields.io/badge/%F0%9F%A4%97%20Train%20Dataset-To%20be%20released-ffc107?color=ffc107&logoColor=white)](https://huggingface.co/datasets/sengine-research/preprocessed-vla-3d)
