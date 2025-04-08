@@ -1,0 +1,85 @@
+{
+  "attn_drop": 0.0,
+  "dec_channels": [
+    96,
+    96,
+    192,
+    384
+  ],
+  "dec_depths": [
+    3,
+    3,
+    3,
+    3
+  ],
+  "dec_num_head": [
+    6,
+    6,
+    12,
+    32
+  ],
+  "dec_patch_size": [
+    1024,
+    1024,
+    1024,
+    1024,
+    1024
+  ],
+  "drop_path": 0.3,
+  "enable_flash": true,
+  "enable_rpe": false,
+  "enc_channels": [
+    48,
+    96,
+    192,
+    384,
+    512
+  ],
+  "enc_depths": [
+    3,
+    3,
+    3,
+    12,
+    3
+  ],
+  "enc_mode": true,
+  "enc_num_head": [
+    3,
+    6,
+    12,
+    24,
+    32
+  ],
+  "enc_patch_size": [
+    1024,
+    1024,
+    1024,
+    1024,
+    1024
+  ],
+  "freeze_encoder": false,
+  "in_channels": 9,
+  "layer_scale": null,
+  "mask_token": true,
+  "mlp_ratio": 4,
+  "order": [
+    "z",
+    "z-trans",
+    "hilbert",
+    "hilbert-trans"
+  ],
+  "pre_norm": true,
+  "proj_drop": 0.0,
+  "qk_scale": null,
+  "qkv_bias": true,
+  "shuffle_orders": true,
+  "stride": [
+    2,
+    2,
+    2,
+    2
+  ],
+  "traceable": true,
+  "upcast_attention": false,
+  "upcast_softmax": false
+}
