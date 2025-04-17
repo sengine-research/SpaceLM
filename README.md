@@ -51,6 +51,25 @@ pip install spconv-cu124
 # install spconv cuda 11.8
 pip install spconv-cu118
 ```
+```bash
+#Installation Problems Integration
+![1744853738699](https://github.com/user-attachments/assets/9023f16b-5916-406f-847c-e110c2432cf6)
+# 1.install torch_scatter；hitting with "ERROR: Failed building wheel for torch_scatter", it's the reason that you cuda and pytorch version problem, just go with this:
+pip install torch torchvision torchaudio -f https://mirrors.aliyun.com/pytorch-wheels
+# 2.install torch_sparse: you might encounter with this "  note: This error originates from a subprocess, and is likely not a problem with pip.
+#  ERROR: Failed building wheel for torchsparse
+#  Running setup.py clean for torchsparse
+#  Failed to build torchsparse
+# I solve this with as following:
+a: git clone https://github.com/mit-han-lab/torchsparse.git
+b: cd torchsparse/
+c: python setup.py install # if you meet "RuntimeError: Error compiling objects for extension" try d if not please ignore
+d sudo apt-get install libsparsehash-dev # can be ignore if you don't meet ③ 
+e python setup.py install # if you meet "[Errno 101] Network is unreachable" just try execute this command line repeatedly, sometimes the network is not very well, but try it can be solved.
+# Finally you will this this: Finished processing dependencies for torchsparse==2.1.0
+
+
+```
 
 ### xformer table
 
