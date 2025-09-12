@@ -85,11 +85,12 @@ if __name__ == "__main__":
             rr.log(
                 f"world/pred/{group}/{uid}",
                 rr.Boxes3D(
-                    centers=box["center"],
+                    centers=(0,0,0),
                     half_sizes=0.5 * box["scale"],
                     labels=label,
                 ),
                 rr.InstancePoses3D(mat3x3=box["rotation"]),
+                rr.Transform3D(translation=box["center"]),
                 static=False,
             )
     rr.script_teardown(args)
